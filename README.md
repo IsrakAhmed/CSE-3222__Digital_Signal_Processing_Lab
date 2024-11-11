@@ -1,4 +1,4 @@
-# CSE-3222__Digital_Signal_Processing_Lab
+# CSE 3222 : Digital Signal Processing Lab
 
 ## Lab Course Contents/List of Experiments:
 
