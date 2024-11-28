@@ -1,0 +1,12 @@
+Steps to setup python and jupyter notebook.
+
+Run CMD as admin for all steps.
+
+1.	First install python
+2.	Verify if python is installed	:	python --version
+3.	Verify if pip is installed	:	pip --version
+4.	Update pip			:	python.exe -m pip install --upgrade pip
+5.	Install JupyterLab		:	pip install jupyterlab
+6.	Install the Jupyter Notebook	:	pip install notebook
+7.	Install matplot library		:	pip install matplotlib
+7.	To run the notebook		:	jupyter notebook

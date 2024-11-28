@@ -1,0 +1,127 @@
+
+2..Consider a causal LTI system described by the difference equation y[n]= (3/4) y[n-1]-(1/8) y(n-2] +x[n]+ (1/3)x[n-1]
+(a) Find out System function H (z) for this system.
+(b) Find out Impulse response sequence h[n] for this system
+
+
+
+
+
+2(a) -------------------------------------------------------------------------------------
+
+from sympy import symbols, simplify
+
+# Define z as a symbol
+z = symbols('z')
+
+# Numerator: x[n] + (1/3) * x[n-1]
+numerator = 1 + 1/3 * z**(-1)
+
+# Denominator: 1 - (3/4) * z^(-1) + (1/8) * z^(-2)
+denominator = 1 - (3/4) * z**(-1) + (1/8) * z**(-2)
+
+# System function H(z)
+H_z = numerator / denominator
+
+# Simplify the expression
+H_z_simplified = simplify(H_z)
+
+# Print the system function H(z)
+print("System Function H(z):")
+print(H_z_simplified)
+
+
+
+2(b)------------------------------------------------------------------------------------
+
+
+from sympy import symbols, apart, simplify
+
+# Define symbolic variables
+z = symbols('z')
+
+# Define the system's numerator and denominator
+numerator = 1 + (1/3) * z**(-1)
+denominator = 1 - (3/4) * z**(-1) + (1/8) * z**(-2)
+
+# System function H(z)
+H_z = numerator / denominator
+
+# Simplify H(z) (optional, for clarity)
+H_z = simplify(H_z)
+
+# Perform partial fraction expansion
+H_z_partial = apart(H_z)
+
+# Manually extract coefficients for impulse response
+z1, z2 = 1/2, 1/4  # Roots of the denominator
+A, B = 1.668,-0.58  # Coefficients found by partial fraction expansion
+
+# Impulse response h[n]
+h_n = f"{A} * ({z1})**n - {B} * ({z2})**n, for n >= 0"
+
+# Display results
+print("System Function H(z):")
+print(H_z)
+
+print("\nPartial Fraction Expansion of H(z):")
+print(H_z_partial)
+
+print("\nImpulse Response h[n]:")
+print(h_n)
+
+
+
+
+
+(1)----------------------------------------------------------------------------------
+
+
+Write a program for generating a composite signal (you could use sine or cosine waves).
+ The parameters including the signal frequencies of 4 KHz, 8 KHz, 16 KHz with the amplitudes of 10 dB, 20 dB, 40 dB respectively, and the signal length should be limited to 1000 in samples.
+a. Plot the generated signal.
+b. Do standard sampling by following the Nyquist rate.
+c. Perform under sampling and over sampling too.
+ Use Subplot function to show the original, sampled, under sampled, and over sampled signal.
+ Show the aliasing effect
+
+
+
+
+(a)--------------------------------------------
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+import cmath
+#Plotting
+
+f1 = 4000
+f2 = 8000
+f3 = 16000
+
+a1 = 3.162
+a2 = 10
+a3 = 100
+
+N = 1000
+start = 0
+end = .05
+sample_counts = 1500* (end-start)
+
+t = np.linspace(start, end, int(sample_counts), endpoint=False)
+y = a1*np.sin(2*np.pi * f1 * t) + a2*np.sin(2*np.pi * f2 * t) + a3*np.sin(2*np.pi * f3 * t)
+
+plt.figure(figsize=(10,5))
+plt.plot(t,y)
+plt.axhline(color = 'r')
+plt.axvline(color = 'r')
+plt.title("Original signal: 10sin(2*pi*40) + 20sin(2*pi*80) + 40sin(2*pi*160)")
+plt.xlabel('Time')
+plt.ylabel('Amplitude')
+plt.grid()
+plt.show()
+
+
+(b)--------------------------------------------
